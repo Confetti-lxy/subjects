@@ -58,11 +58,13 @@ int main()
 
 void dfs(vector<vector<node>> &arr, int start, long distance, long battle, int index)
 {
+    //终止条件
     if (start == des)
     {
         ans = min(ans, ((distance + costs[index]) * battle));
         return;
     }
+    //探索从start开始的所有路径
     int size = arr[start].size();
     for (int i = 0; i < size; i++)
     {
@@ -73,6 +75,7 @@ void dfs(vector<vector<node>> &arr, int start, long distance, long battle, int i
             long bat = battle + z;
             if (dis * bat < ans)
             {
+                //回溯算法
                 book[x] = 1;
                 dfs(arr, x, dis, bat, k);
                 book[x] = 0;
