@@ -23,6 +23,7 @@ vector<point> dijkstra(vector<vector<node>> &arr, vector<int> &costs, int start)
 int main()
 {
     int n = 0, m = 0, s = 0, e = 0;
+    //输入
     cin >> n >> m >> s >> e;
     vector<int> cities(m + 1, 0), costs(m + 1, 0);
     vector<vector<node>> arr(n + 1);
@@ -34,6 +35,7 @@ int main()
     {
         cin >> costs[i];
     }
+    //构造邻接表
     for (int i = 1; i <= m; i++)
     {
         vector<int> city(cities[i]);
@@ -56,8 +58,9 @@ int main()
 vector<point> dijkstra(vector<vector<node>> &arr, vector<int> &costs, int start)
 {
     int n = arr.size();
-    vector<point> ans(n, point(INT_MAX, 0));
-    vector<int> book(n, 0);
+    vector<point> ans(n, point(INT_MAX, 0)); //记录答案
+    vector<int> book(n, 0);                  //记录是否遍历过
+    // ans数组初始化
     ans[start] = point(0, 0);
     for (int i = 0; i < arr[start].size(); i++)
     {
@@ -66,6 +69,7 @@ vector<point> dijkstra(vector<vector<node>> &arr, vector<int> &costs, int start)
     }
     for (int i = 0; i < n - 1; i++)
     {
+        //每次选出未遍历过的最短的那个点，将其标记为已遍历
         int dis = INT_MAX, loc = -1;
         for (int j = 1; j < n; j++)
         {
@@ -76,12 +80,14 @@ vector<point> dijkstra(vector<vector<node>> &arr, vector<int> &costs, int start)
             }
         }
         book[loc] = 1;
+        //对其余未标记的点进行松弛
         int index = ans[loc].index;
         for (int j = 0; j < arr[loc].size(); j++)
         {
             int x = arr[loc][j].to, y = arr[loc][j].length, z = arr[loc][j].index;
             if (book[x] == 0)
             {
+                //判断了是否需要换路
                 long dist = ans[loc].dis + y + ((index == z) ? 0 : costs[z]);
                 if (ans[x].dis > dist)
                 {
