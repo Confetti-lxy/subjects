@@ -19,6 +19,7 @@ void dfs(vector<vector<node>> &arr, int start, long distance, long battle, int i
 int main()
 {
     int n = 0, m = 0, s = 0, e = 0;
+    //输入
     cin >> n >> m >> s >> e;
     vector<int> cities(m + 1, 0);
     vector<vector<node>> arr(n + 1);
@@ -32,6 +33,7 @@ int main()
     {
         cin >> costs[i];
     }
+    //构造邻接表
     for (int i = 1; i <= m; i++)
     {
         vector<int> city(cities[i], 0), time;
