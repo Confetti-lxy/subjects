@@ -4,6 +4,7 @@
         "getanswer",
         "getminstring",
         "getscore",
+        "lowbit",
         "MAXNUMBER"
     ]
 }
