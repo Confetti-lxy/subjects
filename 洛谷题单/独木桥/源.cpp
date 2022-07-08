@@ -15,5 +15,4 @@ int main()
         min_time = max(min_time, min(val, len - val + 1));
     }
     cout << min_time << " " << max_time << endl;
-    return 0;
 }
