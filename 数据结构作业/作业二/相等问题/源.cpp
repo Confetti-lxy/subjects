@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 long count(string s);
 
-int main()
-{
+int main() {
     string s;
     cin >> s;
     long m = count(s);
@@ -15,8 +15,7 @@ int main()
         cout << m << endl;
 }
 
-long count(string s)
-{
+long count(string s) {
     long n = s.size();
     long count = 0;
     for (long i = 0; i < n; i++)

@@ -1,24 +1,26 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+
 using namespace std;
 
-struct TreeNode
-{
+struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
+
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 vector<int> book;
 
 void printTree(TreeNode *root);
+
 vector<int> input(int n);
+
 TreeNode *init(vector<int> &input, int left, int right);
 
-int main()
-{
+int main() {
     int n = 0;
     cin >> n;
     vector<int> nums = input(n);
@@ -26,28 +28,21 @@ int main()
     printTree(root);
 }
 
-void printTree(TreeNode *root)
-{
-    if (root == NULL)
-    {
+void printTree(TreeNode *root) {
+    if (root == NULL) {
         return;
     }
-    queue<TreeNode *> que;
+    queue < TreeNode * > que;
     que.push(root);
     vector<int> ans;
-    while (!que.empty())
-    {
+    while (!que.empty()) {
         int n = que.size();
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < n; i++) {
             auto node = que.front();
             que.pop();
-            if (!node)
-            {
+            if (!node) {
                 ans.push_back(-1);
-            }
-            else
-            {
+            } else {
                 ans.push_back(node->val);
                 que.push(node->left);
                 que.push(node->right);
@@ -55,38 +50,30 @@ void printTree(TreeNode *root)
         }
     }
     int index = ans.size() - 1;
-    while (index >= 0 && ans[index] == -1)
-    {
+    while (index >= 0 && ans[index] == -1) {
         index--;
     }
-    for (int i = 0; i <= index; i++)
-    {
+    for (int i = 0; i <= index; i++) {
         cout << ans[i] << " ";
     }
 }
 
-vector<int> input(int n)
-{
+vector<int> input(int n) {
     vector<int> res(n);
     book.resize(n, 1);
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         cin >> res[i];
     }
     return res;
 }
 
-TreeNode *init(vector<int> &input, int left, int right)
-{
-    if (left > right)
-    {
+TreeNode *init(vector<int> &input, int left, int right) {
+    if (left > right) {
         return NULL;
     }
     int index = left, num = input[left];
-    for (int i = left; i <= right; i++)
-    {
-        if (input[i] > num && book[i] == 1)
-        {
+    for (int i = left; i <= right; i++) {
+        if (input[i] > num && book[i] == 1) {
             num = input[i];
             index = i;
         }

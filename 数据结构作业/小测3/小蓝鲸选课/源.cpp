@@ -3,22 +3,23 @@
 #include <algorithm>
 #include <climits>
 #include <queue>
+
 using namespace std;
 
-class Solution
-{
+class Solution {
 private:
-    vector<vector<int>> distances;
+    vector <vector<int>> distances;
     vector<int> ans, in_degree;
 
 public:
     void initialize(int n, int m);
+
     void Topological_sorting();
+
     void print();
 };
 
-int main()
-{
+int main() {
     int n, m;
     cin >> n >> m;
     Solution solution;
@@ -27,15 +28,13 @@ int main()
     solution.print();
 }
 
-void Solution::initialize(int n, int m)
-{
+void Solution::initialize(int n, int m) {
     distances.resize(n);
     ans.clear();
     in_degree.clear();
     in_degree.resize(n, 0);
     int x = 0, y = 0;
-    for (int i = 0; i < m; i++)
-    {
+    for (int i = 0; i < m; i++) {
         cin >> x >> y;
         distances[x].push_back(y);
         in_degree[y]++;
@@ -43,49 +42,38 @@ void Solution::initialize(int n, int m)
     return;
 }
 
-void Solution::Topological_sorting()
-{
+void Solution::Topological_sorting() {
     int count = 0, n = distances.size();
     queue<int> que;
-    for (int i = 0; i < n; i++)
-    {
-        if (in_degree[i] == 0)
-        {
+    for (int i = 0; i < n; i++) {
+        if (in_degree[i] == 0) {
             que.push(i);
         }
     }
-    while (!que.empty())
-    {
+    while (!que.empty()) {
         auto it = que.front();
         que.pop();
         ans.push_back(it);
         int size = distances[it].size();
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++) {
             int x = distances[it][i];
             in_degree[x]--;
-            if (in_degree[x] == 0)
-            {
+            if (in_degree[x] == 0) {
                 que.push(x);
             }
         }
         distances[it].clear();
         count++;
     }
-    if (count != n)
-    {
+    if (count != n) {
         ans.clear();
     }
 }
 
-void Solution::print()
-{
-    if (ans.size() == 0)
-    {
+void Solution::print() {
+    if (ans.size() == 0) {
         cout << "False" << endl;
-    }
-    else
-    {
+    } else {
         cout << "True" << endl;
     }
     return;

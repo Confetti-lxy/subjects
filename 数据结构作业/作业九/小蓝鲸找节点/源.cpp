@@ -1,31 +1,34 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-struct TreeNode
-{
+struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
+
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-class Solution
-{
+class Solution {
 private:
     vector<int> nums;
     int loc = 0;
 
 public:
     void initialize();
+
     TreeNode *create();
+
     int lowestCommonAncestor(TreeNode *root, int p, int q);
 };
 
-int main()
-{
+int main() {
     Solution solution;
     solution.initialize();
     TreeNode *root = solution.create();
@@ -35,13 +38,11 @@ int main()
     cout << ans << endl;
 }
 
-void Solution::initialize()
-{
+void Solution::initialize() {
     nums.clear();
     int n = 0;
 
-    while (cin >> n)
-    {
+    while (cin >> n) {
         nums.push_back(n);
         if (cin.get() == '\n')
             break;
@@ -54,10 +55,8 @@ void Solution::initialize()
     return;
 }
 
-TreeNode *Solution::create()
-{
-    if (nums[loc] == -1)
-    {
+TreeNode *Solution::create() {
+    if (nums[loc] == -1) {
         return NULL;
     }
     TreeNode *root = new TreeNode(nums[loc]);
@@ -68,46 +67,30 @@ TreeNode *Solution::create()
     return root;
 }
 
-int Solution::lowestCommonAncestor(TreeNode *root, int p, int q)
-{
-    if (root == NULL)
-    {
+int Solution::lowestCommonAncestor(TreeNode *root, int p, int q) {
+    if (root == NULL) {
         return -1;
     }
-    if (root->val == p || root->val == q)
-    {
+    if (root->val == p || root->val == q) {
         return 1;
     }
     int x = lowestCommonAncestor(root->left, p, q);
     int y = lowestCommonAncestor(root->right, p, q);
-    if (x != -1 && y != -1)
-    {
+    if (x != -1 && y != -1) {
         return root->val;
-    }
-    else if (x == -1 && y != -1)
-    {
-        if (y == 1)
-        {
+    } else if (x == -1 && y != -1) {
+        if (y == 1) {
             return root->right->val;
-        }
-        else
-        {
+        } else {
             return y;
         }
-    }
-    else if (x != -1 && y == -1)
-    {
-        if (x == 1)
-        {
+    } else if (x != -1 && y == -1) {
+        if (x == 1) {
             return root->left->val;
-        }
-        else
-        {
+        } else {
             return x;
         }
-    }
-    else
-    {
+    } else {
         return -1;
     }
 }

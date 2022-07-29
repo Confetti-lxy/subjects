@@ -2,43 +2,29 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     stack<char> my_stack;
     char word;
     cin >> word;
-    while (word != '@')
-    {
-        if (word == '(')
-        {
+    while (word != '@') {
+        if (word == '(') {
             my_stack.push(word);
-        }
-        else if (word == ')')
-        {
-            if (!my_stack.empty())
-            {
-                if (my_stack.top() == '(')
-                {
+        } else if (word == ')') {
+            if (!my_stack.empty()) {
+                if (my_stack.top() == '(') {
                     my_stack.pop();
-                }
-                else
-                {
+                } else {
                     my_stack.push(word);
                 }
-            }
-            else
-            {
+            } else {
                 my_stack.push(word);
             }
         }
         cin >> word;
     }
-    if (my_stack.empty())
-    {
+    if (my_stack.empty()) {
         cout << "YES" << endl;
-    }
-    else
-    {
+    } else {
         cout << "NO" << endl;
     };
 }

@@ -1,21 +1,23 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
-class Solution
-{
+class Solution {
 private:
     vector<int> pre, level;
+
     void initialize(int n);
+
     int find(int x);
+
     void Union(int x, int y);
 
 public:
     int cal(int n, int m);
 };
 
-int main()
-{
+int main() {
     int n = 0, m = 0;
     cin >> n >> m;
     Solution solution;
@@ -23,21 +25,17 @@ int main()
     cout << res << endl;
 }
 
-void Solution::initialize(int n)
-{
+void Solution::initialize(int n) {
     pre.resize(n + 1, 0);
     level.resize(n + 1, 0);
-    for (int i = 1; i <= n; i++)
-    {
+    for (int i = 1; i <= n; i++) {
         pre[i] = i;
     }
     return;
 }
 
-int Solution::find(int x)
-{
-    if (x == pre[x])
-    {
+int Solution::find(int x) {
+    if (x == pre[x]) {
         return x;
     }
     int t = pre[x];
@@ -46,8 +44,7 @@ int Solution::find(int x)
     return pre[x];
 }
 
-void Solution::Union(int x, int y)
-{
+void Solution::Union(int x, int y) {
     int fx = find(x);
     int fy = find(y);
     pre[fy] = fx;
@@ -55,26 +52,18 @@ void Solution::Union(int x, int y)
     return;
 }
 
-int Solution::cal(int n, int m)
-{
+int Solution::cal(int n, int m) {
     initialize(n);
     int ans = 0, x = 0, y = 0;
-    while (m--)
-    {
+    while (m--) {
         cin >> x >> y;
-        if (x > n || y > n || x == y)
-        {
+        if (x > n || y > n || x == y) {
             ans++;
-        }
-        else if (find(x) == find(y))
-        {
-            if ((level[x] + 1) % 3 != level[y])
-            {
+        } else if (find(x) == find(y)) {
+            if ((level[x] + 1) % 3 != level[y]) {
                 ans++;
             }
-        }
-        else
-        {
+        } else {
             Union(x, y);
         }
     }
