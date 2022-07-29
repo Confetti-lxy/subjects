@@ -23,7 +23,7 @@ int main() {
             cin >> nums[i];
         }
         bool ans = judge(nums);
-        if (ans == false) {
+        if (!ans) {
             cout << "False" << endl;
         } else {
             cout << "True" << endl;
